@@ -22,6 +22,7 @@ import java_cup.runtime.Symbol;
 L = [a-zA-Z_]+
 D = [0-9]+
 LineTerminator = [ ,\t,\r,\n]+
+End = >[, ,\t,\r,\n]+ |>
 
 // Tags
 HR_OPEN_TAG = <(H|h)(R|r)
@@ -508,6 +509,7 @@ while {lexeme=yytext(); return Attributes;}
 {ROWS_ATTR} {return symbol(sym.RowsAttr);}
 {COLS_ATTR} {return symbol(sym.ColsAttr);}
 
+//{End} {return symbol(sym.EndTag);}
 //Content
 {CONTENT} {return symbol(sym.Content);}
  . {return symbol(sym.ERROR);}

@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lascau/Documents/NetBeansProjects/TranslatorDesignProject_1/src/work/Lexer.java</file>
-            <file>file:/C:/Users/Lascau/Documents/NetBeansProjects/TranslatorDesignProject_1/src/work/Lexer.flex</file>
-            <file>file:/C:/Users/Lascau/Documents/NetBeansProjects/TranslatorDesignProject_1/src/work/Tokens.java</file>
-            <file>file:/C:/Users/Lascau/Documents/NetBeansProjects/TranslatorDesignProject_1/src/work/Main.java</file>
-            <file>file:/C:/Users/Lascau/Documents/NetBeansProjects/TranslatorDesignProject_1/src/work/GUI.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/LexerCup.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Main.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/GUI.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/LexerCup.flex</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Sintax.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Sintax.cup</file>
         </group>
     </open-files>
 </project-private>

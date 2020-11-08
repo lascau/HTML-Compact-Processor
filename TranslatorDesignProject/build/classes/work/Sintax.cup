@@ -348,21 +348,21 @@ HTML_TAG ::=
 ;
 
 IMG_TAG ::=
-    ImgOpen Content ImgClose
-    ImgOpen SrcAttr Content ImgClose
-    ImgOpen AlignAttr Content ImgClose
-    ImgOpen WidthAttr Content ImgClose
-    ImgOpen HeightAttr Content ImgClose
-    ImgOpen HspaceAttr Content ImgClose
-    ImgOpen VspaceAttr Content ImgClose
-    ImgOpen AltAttr Content ImgClose
-    ImgOpen BorderAttr Content ImgClose
-    ImgOpen UsemapAttr Content ImgClose
-    ImgOpen IsmapAttr Content ImgClose
+    ImgOpen Content ImgClose |
+    ImgOpen SrcAttr Content ImgClose |
+    ImgOpen AlignAttr Content ImgClose |
+    ImgOpen WidthAttr Content ImgClose |
+    ImgOpen HeightAttr Content ImgClose |
+    ImgOpen HspaceAttr Content ImgClose |
+    ImgOpen VspaceAttr Content ImgClose |
+    ImgOpen AltAttr Content ImgClose |
+    ImgOpen BorderAttr Content ImgClose |
+    ImgOpen UsemapAttr Content ImgClose |
+    ImgOpen IsmapAttr Content ImgClose 
 ;
 
 INPUT_TAG ::=   
-    InputOpen Content InputClose
+    InputOpen Content InputClose 
     InputOpen TypeAttr Content InputClose
     InputOpen NameAttr Content InputClose
     InputOpen SizeAttr Content InputClose
