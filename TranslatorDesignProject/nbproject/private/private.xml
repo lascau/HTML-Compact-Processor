@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/LexerCup.java</file>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Main.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/sym.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Lexer.java</file>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/GUI.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Lexer.flex</file>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/LexerCup.flex</file>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Sintax.java</file>
+            <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Tokens.java</file>
             <file>file:/C:/Users/Lascau/Desktop/HTML-Compact-Processor/TranslatorDesignProject/src/work/Sintax.cup</file>
         </group>
     </open-files>

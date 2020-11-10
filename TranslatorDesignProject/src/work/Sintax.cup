@@ -16,16 +16,16 @@ parser code
 
 terminal ERROR, Content,
         HrOpen, HrClose, BrOpen, BrClose, AbbrOpen, AbbrClose, AcronymOpen, AcronymClose, AddressOpen, AddressClose, AppletOpen, AppletClose, BOpen, BClose, ButtonOpen, ButtonClose, CodeOpen, CodeClose, HeadOpen, HeadClose, SampOpen, SampClose, DelOpen, DelClose, XmpOpen, XmpClose, StrongOpen, StrongClose, VarOpen, VarClose, UOpen, UClose, SOpen, SClose, QOpen, QClose, IOpen, IClose, LabelOpen, LabelClose, LegendOpen, LegendClose, ListingOpen, ListingClose, NoframesOpen, NoframesClose, DdOpen, DdClose, DfnOpen, DfnClose, DtOpen, DtClose, EmOpen, EmClose, ScriptOpen, ScriptClose, SmallOpen, SmallClose,  SpanOpen, SpanClose, StrikeOpen, StrikeClose, StyleOpen, StyleClose, SubOpen, SubClose, SupOpen, SupClose, FrameOpen, FrameClose, FramesetOpen, FramesetClose, IframeOpen, IframeClose, InsOpen, InsClose, KbdOpen, KbdClose, ColgroupOpen, ColgroupClose, FieldsetOpen, FieldsetClose, NoscriptOpen, NoscriptClose, ObjectOpen, ObjectClose, OptgroupOpen,  OptgroupClose, ParamOpen, ParamClose, PlaintextOpen, PlaintextClose,  TheadOpen, TheadClose, TitleOpen, TitleClose, BlockquoteOpen, BlockquoteClose,  CaptionOpen, CaptionClose, CenterOpen, CenterClose, CiteOpen, CiteClose, ColOpen, ColClose, TtOpen, TtClose, LiOpen, LiClose, LinkOpen, LinkClose, MapOpen, MapClose, MenuOpen, MenuClose, MetaOpen, MetaClose, NextidOpen, NextidClose, OlOpen, OlClose, OptionOpen, OptionClose, POpen, PClose, PreOpen, PreClose, SelectOpen, SelectClose, TableOpen,  TableClose,  TdOpen, TdClose, TextareaOpen, TextareaClose, ThOpen, ThClose, TrOpen, TrClose, UlOpen, UlClose, TbodyOpen, TbodyClose,  DlOpen, DlClose, FontOpen, FontClose, FormOpen, FormClose, HnOpen, HnClose, HtmlOpen, HtmlClose, ImgOpen, ImgClose, InputOpen, InputClose, IsindexOpen, IsindexClose, BigOpen, BigClose,  BdoOpen, BdoClose, BasefontOpen, BasefontClose, BodyOpen, BodyClose, DivOpen, DivClose, AOpen, AClose, AreaOpen, AreaClose, BaseOpen, BaseClose, DirOpen, DirClose,     
-        SizeAttr, WidthAttr, AlignAttr, NoshadeAttr, NameAttr, HrefAttr, RelAttr, RevAttr, TitleAttr, UrnAttr, MethodsAttr, ShapeAttr, CoordsAttr, AltAttr,  NohrefAttr, BgcolorAttr, BackgroundAttr, TextAttr, LinkAttr, VlinkAttr, AlinkAttr, VersionAttr,  ColorAttr, CompactAttr, ClearAttr, ActionAttr, EnctypeAttr, MethodAttr, SrcAttr, HeightAttr, HspaceAttr, VspaceAttr, BorderAttr,  UsemapAttr, IsmapAttr, TypeAttr, ValueAttr, MaxlengthAttr,  CheckedAttr, PromptAttr, IdAttr, HttpEquivAttr, ContentAttr, StartAttr,  SelectedAttr, MultipleAttr,  CellspacingAttr, CellpaddingAttr, ValignAttr, RowspanAttr, ColspanAttr, NowrapAttr, RowsAttr, ColsAttr;                   
+        SizeAttr, WidthAttr, AlignAttr, NoshadeAttr, NameAttr, HrefAttr, RelAttr, RevAttr, TitleAttr, UrnAttr, MethodsAttr, ShapeAttr, CoordsAttr, AltAttr,  NohrefAttr, BgcolorAttr, BackgroundAttr, TextAttr, LinkAttr, VlinkAttr, AlinkAttr, VersionAttr,  ColorAttr, CompactAttr, ClearAttr, ActionAttr, EnctypeAttr, MethodAttr, SrcAttr, HeightAttr, HspaceAttr, VspaceAttr, BorderAttr,  UsemapAttr, IsmapAttr, TypeAttr, ValueAttr, MaxlengthAttr,  CheckedAttr, PromptAttr, IdAttr, HttpEquivAttr, ContentAttr, StartAttr,  SelectedAttr, MultipleAttr,  CellspacingAttr, CellpaddingAttr, ValignAttr, RowspanAttr, ColspanAttr, NowrapAttr, RowsAttr, ColsAttr, LineTerminator, EndTag, DOCTYPE;                   
 
 non terminal ABBR_TAG, ACRONYM_TAG, ADDRESS_TAG, APPLET_TAG, B_TAG, BDO_TAG, BIG_TAG, BLOCKQUOTE_TAG, BUTTON_TAG, CAPTION_TAG, CENTER_TAG, CITE_TAG, CODE_TAG, COL_TAG, COLGROUP_TAG, DD_TAG, DEL_TAG, DFN_TAG,
 DT_TAG, EM_TAG, FIELDSET_TAG, FRAME_TAG, FRAMESET_TAG, HEAD_TAG, I_TAG, IFRAME_TAG, INS_TAG, KBD_TAG, LABEL_TAG, LEGEND_TAG, LISTING_TAG, NOFRAMES_TAG, NOSCRIPT_TAG, OBJECT_TAG, OPTGROUP_TAG,
 PARAM_TAG, PLAINTEXT_TAG, Q_TAG, S_TAG, SAMP_TAG, SCRIPT_TAG, SMALL_TAG, SPAN_TAG, STRIKE_TAG, STRONG_TAG, STYLE_TAG, SUB_TAG, SUP_TAG, TBODY_TAG, THEAD_TAG, TITLE_TAG, TT_TAG, U_TAG, VAR_TAG,
 XMP_TAG, MENU_TAG, A_TAG, AREA_TAG, BASE_TAG, BODY_TAG, BR_TAG, DIV_TAG, DIR_TAG, DL_TAG, FONT_TAG, FORM_TAG, HR_TAG, HN_TAG, HTML_TAG, IMG_TAG, INPUT_TAG, ISINDEX_TAG, LI_TAG, LINK_TAG, MAP_TAG, META_TAG, NEXTID_TAG, OL_TAG, OPTION_TAG, P_TAG, PRE_TAG, SELECT_TAG, 
-TABLE_TAG, TD_TAG, TH_TAG, TR_TAG, UL_TAG, TEXTAREA_TAG, BASEFONT_TAG, ERROR_S, INIT;
+TABLE_TAG, TD_TAG, TH_TAG, TR_TAG, UL_TAG, TEXTAREA_TAG, BASEFONT_TAG, IMG_ATTR, BR_ATTR, DIR_ATTR, MENU_ATTR, BASEFONT_ATTR, A_ATTR, TEXTAREA_ATTR, LINK_ATTR, HTML_ATTR, HTML_CONTENT, ERROR_S, INIT, BODY_ATTR, DOCTYPE_TAG, BODY_CONTENT;
 
 //Grammar
-start with INIT;
+start with HTML_TAG;
  
 INIT ::=
     BIG_TAG | BDO_TAG | ABBR_TAG | ACRONYM_TAG |  ADDRESS_TAG | APPLET_TAG | B_TAG | BLOCKQUOTE_TAG | BUTTON_TAG | CAPTION_TAG | CENTER_TAG | CITE_TAG | COL_TAG | COLGROUP_TAG | DD_TAG | DEL_TAG | DFN_TAG | 
@@ -33,243 +33,317 @@ INIT ::=
     PLAINTEXT_TAG | Q_TAG | S_TAG | SAMP_TAG | SCRIPT_TAG | SMALL_TAG | SPAN_TAG | STRIKE_TAG | STRONG_TAG | STYLE_TAG | SUB_TAG | SUP_TAG | TBODY_TAG | THEAD_TAG | TITLE_TAG | TT_TAG | U_TAG | VAR_TAG | XMP_TAG |
     FRAMESET_TAG | CODE_TAG |
     MENU_TAG | A_TAG | AREA_TAG | BASE_TAG | BODY_TAG | BR_TAG | DIV_TAG | DIR_TAG | DL_TAG | FONT_TAG | FORM_TAG | HR_TAG | HN_TAG | HTML_TAG | IMG_TAG | INPUT_TAG | ISINDEX_TAG | LI_TAG | LINK_TAG | MAP_TAG | META_TAG | NEXTID_TAG | OL_TAG | OPTION_TAG | P_TAG | PRE_TAG | SELECT_TAG | TABLE_TAG | TD_TAG | TH_TAG | TR_TAG | UL_TAG | TEXTAREA_TAG | BASEFONT_TAG |
-    ERROR_S 
+    ERROR_S | IMG_ATTR | BR_ATTR | DIR_ATTR | MENU_ATTR | BASEFONT_ATTR | A_ATTR | TEXTAREA_ATTR | LINK_ATTR | HTML_ATTR | HTML_CONTENT
 ; 
+
+DOCTYPE_TAG ::=
+   DOCTYPE_TAG LineTerminator 
+;
+
 // Tags without attributes
 ABBR_TAG ::= 
+    AbbrOpen EndTag AbbrClose |
     AbbrOpen Content AbbrClose
 ;
 
 ACRONYM_TAG ::= 
+    AcronymOpen EndTag AcronymClose |
     AcronymOpen Content AcronymClose
 ;
 
  ADDRESS_TAG ::= 
+    AddressOpen EndTag AddressClose |
     AddressOpen Content AddressClose
 ;
 
 APPLET_TAG ::=
+    AppletOpen EndTag AppletClose |
     AppletOpen Content AppletClose
 ;
 
 B_TAG ::= 
+    BOpen EndTag BClose |
     BOpen Content BClose
 ;
 
 BLOCKQUOTE_TAG ::= 
+    BlockquoteOpen EndTag BlockquoteClose |
     BlockquoteOpen Content BlockquoteClose
 ;
 
 BUTTON_TAG ::=
+    ButtonOpen EndTag ButtonClose |
     ButtonOpen Content ButtonClose
 ;
 
 CAPTION_TAG ::= 
+    CaptionOpen EndTag CaptionClose |
     CaptionOpen Content CaptionClose
 ;
 
 CENTER_TAG ::= 
+    CenterOpen EndTag CenterClose |
     CenterOpen Content CenterClose
 ;
 
 CITE_TAG ::=
+    CiteOpen EndTag CiteClose |
     CiteOpen Content CiteClose
 ;
 
 COL_TAG ::= 
+    ColOpen EndTag ColClose |
     ColOpen Content ColClose
 ;
 
 CODE_TAG ::= 
+    CodeOpen EndTag CodeClose |
     CodeOpen Content CodeClose
 ;
 
-
 COLGROUP_TAG ::= 
+    ColgroupOpen EndTag ColgroupClose |
     ColgroupOpen Content ColgroupClose
 ;
 
 DD_TAG ::= 
+    DdOpen EndTag DdClose |
     DdOpen Content DdClose
 ;
 
 DEL_TAG ::=
+    DelOpen EndTag DelClose |
     DelOpen Content DelClose
 ;
 
 DFN_TAG ::= 
+    DfnOpen EndTag DfnClose |
     DfnOpen Content DfnClose
 ;
 
 BIG_TAG ::= 
+    BigOpen EndTag BigClose |
     BigOpen Content BigClose
 ;
 
 BDO_TAG ::=
+    BdoOpen EndTag BdoClose |
     BdoOpen Content BdoClose 
 ;
 DT_TAG ::=
+    DtOpen EndTag DtClose |
     DtOpen Content DtClose
 ;
 
 EM_TAG ::=
+    EmOpen EndTag EmClose |
     EmOpen Content EmClose
 ;
 
 FIELDSET_TAG ::=
+    FieldsetOpen EndTag FieldsetClose |
     FieldsetOpen Content FieldsetClose
 ;
 
 FRAME_TAG ::= 
+    FrameOpen EndTag FrameClose |
     FrameOpen Content FrameClose
 ;
 
 FRAMESET_TAG ::=
+    FramesetOpen EndTag FramesetClose |
     FramesetOpen Content FramesetClose
 ;
 
 HEAD_TAG ::=    
+    HeadOpen EndTag HeadClose |
     HeadOpen Content HeadClose
 ;
 
 I_TAG ::=
+    IOpen EndTag IClose |
     IOpen Content IClose
 ;
 
 IFRAME_TAG ::=
+    IframeOpen EndTag IframeClose |
     IframeOpen Content IframeClose
 ;
 
 INS_TAG ::=
+    InsOpen EndTag InsClose |
     InsOpen Content InsClose
 ;
 
-KBD_TAG ::=     
+KBD_TAG ::=    
+    KbdOpen EndTag KbdClose |
     KbdOpen Content KbdClose
 ;
 
 LABEL_TAG ::=
+    LabelOpen EndTag LabelClose |
     LabelOpen Content LabelClose
 ;
 
 LEGEND_TAG ::=
+    LegendOpen EndTag LegendClose |
     LegendOpen Content LegendClose
 ;
 
 LISTING_TAG ::=
+    ListingOpen EndTag ListingClose |
     ListingOpen Content ListingClose
 ;
 
 NOFRAMES_TAG ::=
+    NoframesOpen EndTag NoframesClose |
     NoframesOpen Content NoframesClose
 ;
 
 NOSCRIPT_TAG ::= 
+    NoscriptOpen EndTag NoscriptClose |
     NoscriptOpen Content NoscriptClose
 ;
 
 OBJECT_TAG ::= 
+    ObjectOpen EndTag ObjectClose |
     ObjectOpen Content ObjectClose
 ;
 
-OPTGROUP_TAG ::=    
+OPTGROUP_TAG ::= 
+    OptgroupOpen EndTag OptgroupClose |
     OptgroupOpen Content OptgroupClose
 ;
 PARAM_TAG ::= 
+    ParamOpen EndTag ParamClose |
     ParamOpen Content ParamClose
 ;
 
 PLAINTEXT_TAG ::=
+    PlaintextOpen EndTag PlaintextClose |
     PlaintextOpen Content PlaintextClose
 ;
 
 Q_TAG ::=
+    QOpen EndTag QClose |
     QOpen Content QClose
 ;
 
 S_TAG ::=
+    SOpen EndTag SClose |
     SOpen Content SClose
 ;
 
 SAMP_TAG ::=
+    SampOpen EndTag SampClose |
     SampOpen Content SampClose
 ;
 
 SCRIPT_TAG ::=
+    ScriptOpen EndTag ScriptClose |
     ScriptOpen Content ScriptClose
 ;
 
 SMALL_TAG ::=
+    SmallOpen EndTag SmallClose |
     SmallOpen Content SmallClose
 ;
 
 SPAN_TAG ::=
+    SpanOpen EndTag SpanClose |
     SpanOpen Content SpanClose
 ;
 
 STRIKE_TAG ::=
+    StrikeOpen EndTag StrikeClose |
     StrikeOpen Content StrikeClose
 ;
 
 STRONG_TAG ::=
+    StrongOpen EndTag StrongClose |
     StrongOpen Content StrongClose
 ;
 
 STYLE_TAG ::=
+    StyleOpen EndTag StyleClose |
     StyleOpen Content StyleClose
 ;
 
 SUB_TAG ::=
+    SubOpen EndTag SubClose |
     SubOpen Content SubClose
 ;
 
 SUP_TAG ::=
+    SupOpen EndTag SupClose |
     SupOpen Content SupClose
 ;
 
 TBODY_TAG ::=
+    TbodyOpen EndTag TbodyClose |
     TbodyOpen Content TbodyClose
 ;
 
 THEAD_TAG ::=
+    TheadOpen EndTag TheadClose |
     TheadOpen Content TheadClose
 ;
 
 TITLE_TAG ::=
+    TitleOpen EndTag TitleClose |
     TitleOpen Content TitleClose
 ;
 
 TT_TAG ::=
+    TtOpen EndTag TtClose |
     TtOpen Content TtClose
 ;
 
-U_TAG ::=   
+U_TAG ::= 
+    UOpen EndTag UClose |
     UOpen Content UClose
 ;
 
 VAR_TAG ::=
+    VarOpen EndTag VarClose |
     VarOpen Content VarClose
 ;
 
 XMP_TAG ::=
+    XmpOpen EndTag XmpClose |
     XmpOpen Content XmpClose
 ;
 // Tags with attributes
 
-MENU_TAG ::=
-    MenuOpen Content MenuClose |
-    MenuOpen CompactAttr Content MenuClose
+MENU_ATTR ::=
+    CompactAttr 
 ;
 
-A_TAG ::=
-    AOpen Content AClose |
-    AOpen HrefAttr Content AClose
-    AOpen RelAttr Content AClose
-    AOpen RevAttr Content AClose
-    AOpen TitleAttr Content AClose
-    AOpen UrnAttr Content AClose
-    AOpen MethodsAttr Content AClose
+MENU_TAG ::=
+    MenuOpen Content MenuClose |
+    MenuOpen MENU_ATTR Content MenuClose
+;
 
+//mere
+A_ATTR ::=
+    LineTerminator HrefAttr |
+    LineTerminator RelAttr |
+    LineTerminator RevAttr |
+    LineTerminator TitleAttr |
+    LineTerminator UrnAttr |
+    A_ATTR LineTerminator MethodsAttr |
+    A_ATTR LineTerminator HrefAttr |
+    A_ATTR LineTerminator RelAttr |
+    A_ATTR LineTerminator RevAttr |
+    A_ATTR LineTerminator TitleAttr |
+    A_ATTR LineTerminator UrnAttr 
+;
+
+//mere
+A_TAG ::=
+    AOpen EndTag AClose |
+    AOpen Content AClose |
+    AOpen A_ATTR Content AClose
 ;
 
 AREA_TAG ::=
@@ -286,24 +360,53 @@ BASE_TAG ::=
     BaseOpen HrefAttr Content BaseClose
 ;
 
+BODY_ATTR ::=
+    LineTerminator BgcolorAttr |
+    LineTerminator BackgroundAttr |
+    LineTerminator TextAttr |
+    LineTerminator LinkAttr |
+    LineTerminator VlinkAttr |
+    LineTerminator AlinkAttr |   
+    BODY_ATTR LineTerminator BgcolorAttr |
+    BODY_ATTR LineTerminator BackgroundAttr |
+    BODY_ATTR LineTerminator TextAttr |
+    BODY_ATTR LineTerminator LinkAttr |
+    BODY_ATTR LineTerminator VlinkAttr |
+    BODY_ATTR LineTerminator AlinkAttr 
+;
+
+BODY_CONTENT ::=
+    B_TAG |
+    BASEFONT_TAG |
+    BODY_CONTENT LineTerminator B_TAG |
+    BODY_CONTENT LineTerminator BASEFONT_TAG
+;
+
+
 BODY_TAG ::=
-    BodyOpen Content BodyClose |
-    BodyOpen BgcolorAttr Content BodyClose |
-    BodyOpen BackgroundAttr Content BodyClose |
-    BodyOpen TextAttr Content BodyClose |
-    BodyOpen LinkAttr Content BodyClose |
-    BodyOpen VlinkAttr Content BodyClose |
-    BodyOpen AlinkAttr Content BodyClose 
+    BodyOpen EndTag BodyClose |
+    BodyOpen EndTag BODY_CONTENT BodyClose |
+    BodyOpen BODY_ATTR EndTag BODY_CONTENT BodyClose 
+    //BodyOpen BODY_ATTR EndTag BODY_CONTENT LineTerminator BodyClose 
+
 ;
 
+BR_ATTR ::=
+    ClearAttr
+;
+ 
+//merge
 BR_TAG ::=
+    BrOpen EndTag BrClose |
     BrOpen Content BrClose |
-    BrOpen ClearAttr Content BrClose |
+    BrOpen LineTerminator BR_ATTR Content BrClose
 ;
 
+//merge
 DIR_TAG ::= 
-    DirOpen Content DirClose
-    DirOpen CompactAttr Content DirClose
+    DirOpen EndTag DirClose |
+    DirOpen Content DirClose |
+    DirOpen LineTerminator MENU_ATTR Content DirClose
 ;
 
 DIV_TAG ::= 
@@ -342,23 +445,45 @@ HR_TAG ::=
     HrOpen NoshadeAttr Content HrClose
 ;
 
+HTML_ATTR ::=
+    LineTerminator VersionAttr | 
+    HTML_ATTR LineTerminator VersionAttr
+;
+
+HTML_CONTENT ::=
+    HEAD_TAG |
+    HEAD_TAG LineTerminator |
+    BODY_TAG |
+    BODY_TAG LineTerminator |
+    HEAD_TAG BODY_TAG |
+    HEAD_TAG BODY_TAG LineTerminator |
+    HEAD_TAG LineTerminator BODY_TAG |
+    HEAD_TAG LineTerminator BODY_TAG LineTerminator
+;
+
 HTML_TAG ::=
-    HtmlOpen Content HtmlClose
-    HtmlOpen VersionAttr Content HtmlClose
+    HtmlOpen EndTag HtmlClose |
+    HtmlOpen EndTag HTML_CONTENT HtmlClose |
+    HtmlOpen HTML_ATTR EndTag HTML_CONTENT HtmlClose 
+;
+
+IMG_ATTR ::=
+    SrcAttr |
+    AlignAttr |
+    WidthAttr |
+    HeightAttr |
+    HspaceAttr |   
+    VspaceAttr |
+    AltAttr |
+    BorderAttr |
+    UsemapAttr |
+    IsmapAttr
 ;
 
 IMG_TAG ::=
+    ImgOpen ImgClose
     ImgOpen Content ImgClose |
-    ImgOpen SrcAttr Content ImgClose |
-    ImgOpen AlignAttr Content ImgClose |
-    ImgOpen WidthAttr Content ImgClose |
-    ImgOpen HeightAttr Content ImgClose |
-    ImgOpen HspaceAttr Content ImgClose |
-    ImgOpen VspaceAttr Content ImgClose |
-    ImgOpen AltAttr Content ImgClose |
-    ImgOpen BorderAttr Content ImgClose |
-    ImgOpen UsemapAttr Content ImgClose |
-    ImgOpen IsmapAttr Content ImgClose 
+    ImgOpen IMG_ATTR Content ImgClose |
 ;
 
 INPUT_TAG ::=   
@@ -384,18 +509,30 @@ LI_TAG ::=
     LiOpen SizeAttr Content LiClose
     LiOpen ValueAttr Content LiClose
 ;
-
-LINK_TAG ::=
-    LinkOpen Content LinkClose
-    LinkOpen HrefAttr Content LinkClose
-    LinkOpen RelAttr Content LinkClose
-    LinkOpen RevAttr Content LinkClose
-    LinkOpen UrnAttr Content LinkClose
-    LinkOpen MethodsAttr Content LinkClose
-    LinkOpen TitleAttr Content LinkClose
-    LinkOpen IdAttr Content LinkClose
+/*
+LINK_ATTR ::=
+    LineTerminator HrefAttr |
+    LineTerminator RelAttr |
+    LineTerminator RevAttr |
+    LineTerminator UrnAttr |
+    LineTerminator MethodsAttr |
+    LineTerminator TitleAttr |
+    LineTerminator IdAttr |
+    LINK_ATTR LineTerminator HrefAttr |
+    LINK_ATTR LineTerminator RelAttr |
+    LINK_ATTR LineTerminator RevAttr |
+    LINK_ATTR LineTerminator UrnAttr |
+    LINK_ATTR LineTerminator MethodsAttr |
+    LINK_ATTR LineTerminator TitleAttr |
+    LINK_ATTR LineTerminator IdAttr 
 ;
 
+LINK_TAG ::=
+    LinkOpen EndTag LinkClose |
+    LinkOpen Content LinkClose |
+    LinkOpen LINK_ATTR Content LinkClose
+;
+*/
 MAP_TAG ::=
     MapOpen Content MapClose
     MapOpen NameAttr Content MapClose
@@ -462,11 +599,21 @@ TD_TAG ::=
     TdOpen NowrapAttr Content TdClose   
 ;
 
+//mere
+TEXTAREA_ATTR ::=
+    LineTerminator NameAttr |
+    LineTerminator RowsAttr |
+    LineTerminator ColsAttr |
+    TEXTAREA_ATTR LineTerminator NameAttr |
+    TEXTAREA_ATTR LineTerminator RowsAttr |
+    TEXTAREA_ATTR LineTerminator ColsAttr
+;
+
+//mere
 TEXTAREA_TAG ::=
-    TextareaOpen Content TextareaClose
-    TextareaOpen NameAttr Content TextareaClose
-    TextareaOpen RowsAttr Content TextareaClose
-    TextareaOpen ColsAttr Content TextareaClose
+    TextareaOpen EndTag TextareaClose |
+    TextareaOpen Content TextareaClose |
+    TextareaOpen TEXTAREA_ATTR Content TextareaClose
 ;
 
 TH_TAG ::=
@@ -493,9 +640,19 @@ UL_TAG ::=
     UlOpen CompactAttr Content UlClose
 ;
 
+//merge
+BASEFONT_ATTR ::=
+    LineTerminator ContentAttr  |
+    LineTerminator SizeAttr |
+    BASEFONT_ATTR LineTerminator ContentAttr |
+    BASEFONT_ATTR LineTerminator SizeAttr 
+;
+
+//merge
 BASEFONT_TAG ::=
-    BasefontOpen Content BasefontClose
-    BasefontOpen SizeAttr Content BasefontClose
+    BasefontOpen EndTag BasefontClose |
+    BasefontOpen Content BasefontClose | 
+    BasefontOpen BASEFONT_ATTR Content BasefontClose
 ;
 
 ERROR_S ::=

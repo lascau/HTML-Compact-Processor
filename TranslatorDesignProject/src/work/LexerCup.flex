@@ -24,6 +24,8 @@ D = [0-9]+
 LineTerminator = [ ,\t,\r,\n]+
 End = >[, ,\t,\r,\n]+ |>
 
+DOCTYPE_TAG = <DOCTYPE html>
+
 // Tags
 HR_OPEN_TAG = <(H|h)(R|r)
 HR_CLOSE_TAG = <\/(H|h)(R|r)>
@@ -270,7 +272,6 @@ id |
 size |
 align |
 while {lexeme=yytext(); return Attributes;}
-{LineTerminator} {/*Ignore*/}
 "//".* {/*Ignore*/}
 */
 
@@ -509,7 +510,10 @@ while {lexeme=yytext(); return Attributes;}
 {ROWS_ATTR} {return symbol(sym.RowsAttr);}
 {COLS_ATTR} {return symbol(sym.ColsAttr);}
 
-//{End} {return symbol(sym.EndTag);}
+{DOCTYPE_TAG}  {return symbol(sym.DOCTYPE);}
+
+{End} {return symbol(sym.EndTag);}
+{LineTerminator} {return symbol(sym.LineTerminator);}
 //Content
 {CONTENT} {return symbol(sym.Content);}
  . {return symbol(sym.ERROR);}

@@ -61,7 +61,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        outputTextBox.setEditable(false);
         outputTextBox.setColumns(20);
+        outputTextBox.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         outputTextBox.setRows(5);
         jScrollPane1.setViewportView(outputTextBox);
 
@@ -73,6 +75,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         inputTextBoxe.setColumns(20);
+        inputTextBoxe.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         inputTextBoxe.setRows(5);
         jScrollPane3.setViewportView(inputTextBoxe);
 
@@ -847,7 +850,7 @@ public class GUI extends javax.swing.JFrame {
 
         try {
             s.parse();
-            outputTextBox.setText("Successfully checked!");
+            outputTextBox.setText("Successfully checked! ✔");
             outputTextBox.setForeground(new Color (25,111,61));
         } catch (Exception ex) {
             Symbol sym = s.getS();
