@@ -2,7 +2,6 @@
 	<head>
 		fdffd
 	</head>
-	<body link="232">
-		<b>dfdfd</b>
-		<basefont>sdsds</basefont></body>
-</html>
+	<body>
+		sds
+	</body></html>
