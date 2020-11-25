@@ -3,6 +3,8 @@ import java_cup.runtime.Symbol;
 
 parser code
 {:
+    
+    public Node root = null;
     private Symbol s;
     
     public void syntax_error(Symbol s){
@@ -13,6 +15,7 @@ parser code
         return this.s;
 }
 :};
+
 
 terminal ERROR, Content,
         HrOpen, HrClose, BrOpen, BrClose, AbbrOpen, AbbrClose, AcronymOpen, AcronymClose, AddressOpen, AddressClose, AppletOpen, AppletClose, BOpen, BClose, ButtonOpen, ButtonClose, CodeOpen, CodeClose, HeadOpen, HeadClose, SampOpen, SampClose, DelOpen, DelClose, XmpOpen, XmpClose, StrongOpen, StrongClose, VarOpen, VarClose, UOpen, UClose, SOpen, SClose, QOpen, QClose, IOpen, IClose, LabelOpen, LabelClose, LegendOpen, LegendClose, ListingOpen, ListingClose, NoframesOpen, NoframesClose, DdOpen, DdClose, DfnOpen, DfnClose, DtOpen, DtClose, EmOpen, EmClose, ScriptOpen, ScriptClose, SmallOpen, SmallClose,  SpanOpen, SpanClose, StrikeOpen, StrikeClose, StyleOpen, StyleClose, SubOpen, SubClose, SupOpen, SupClose, FrameOpen, FrameClose, FramesetOpen, FramesetClose, IframeOpen, IframeClose, InsOpen, InsClose, KbdOpen, KbdClose, ColgroupOpen, ColgroupClose, FieldsetOpen, FieldsetClose, NoscriptOpen, NoscriptClose, ObjectOpen, ObjectClose, OptgroupOpen,  OptgroupClose, ParamOpen, ParamClose, PlaintextOpen, PlaintextClose,  TheadOpen, TheadClose, TitleOpen, TitleClose, BlockquoteOpen, BlockquoteClose,  CaptionOpen, CaptionClose, CenterOpen, CenterClose, CiteOpen, CiteClose, ColOpen, ColClose, TtOpen, TtClose, LiOpen, LiClose, LinkOpen, LinkClose, MapOpen, MapClose, MenuOpen, MenuClose, MetaOpen, MetaClose, NextidOpen, NextidClose, OlOpen, OlClose, OptionOpen, OptionClose, POpen, PClose, PreOpen, PreClose, SelectOpen, SelectClose, TableOpen,  TableClose,  TdOpen, TdClose, TextareaOpen, TextareaClose, ThOpen, ThClose, TrOpen, TrClose, UlOpen, UlClose, TbodyOpen, TbodyClose,  DlOpen, DlClose, FontOpen, FontClose, FormOpen, FormClose, HnOpen, HnClose, HtmlOpen, HtmlClose, ImgOpen, ImgClose, InputOpen, InputClose, IsindexOpen, IsindexClose, BigOpen, BigClose,  BdoOpen, BdoClose, BasefontOpen, BasefontClose, BodyOpen, BodyClose, DivOpen, DivClose, AOpen, AClose, AreaOpen, AreaClose, BaseOpen, BaseClose, DirOpen, DirClose,     
@@ -63,7 +66,7 @@ APPLET_TAG ::=
 
 B_TAG ::= 
     BOpen EndTag BClose |
-    BOpen Content BClose
+    BOpen Content: con BClose {: RESULT = Node.createBNode((String)con); :}
 ;
 
 BLOCKQUOTE_TAG ::= 
@@ -451,20 +454,26 @@ HTML_ATTR ::=
 ;
 
 HTML_CONTENT ::=
-    HEAD_TAG |
-    HEAD_TAG LineTerminator |
+    HEAD_TAG {: RESULT = Node.createHeadNode("Head node"); 
+                root.addLink(RESULT);:} |
+    HEAD_TAG LineTerminator {: RESULT = Node.createHeadNode("Head node"); 
+                            root.addLink(RESULT);:}  |
     BODY_TAG |
     BODY_TAG LineTerminator |
-    HEAD_TAG BODY_TAG |
+    HEAD_TAG BODY_TAG {: RESULT = Node.createHeadNode("Head node"); 
+                        root.addLink(RESULT);:} |
     HEAD_TAG BODY_TAG LineTerminator |
-    HEAD_TAG LineTerminator BODY_TAG |
-    HEAD_TAG LineTerminator BODY_TAG LineTerminator
+    HEAD_TAG LineTerminator BODY_TAG {: RESULT = Node.createHeadNode("Head node"); 
+                                        root.addLink(RESULT);:}  |
+    HEAD_TAG LineTerminator BODY_TAG LineTerminator {: RESULT = Node.createHeadNode("Head node"); 
+                                                        root.addLink(RESULT);:} 
 ;
 
+
 HTML_TAG ::=
-    HtmlOpen EndTag HtmlClose |
-    HtmlOpen EndTag HTML_CONTENT HtmlClose |
-    HtmlOpen HTML_ATTR EndTag HTML_CONTENT HtmlClose 
+    HtmlOpen EndTag HtmlClose: con HtmlClose {: root = Node.createHtmlNode(new Node("")); :} |
+    HtmlOpen EndTag HTML_CONTENT : con HtmlClose {: root = Node.createHtmlNode((Node)con); :} |
+    HtmlOpen HTML_ATTR EndTag HTML_CONTENT: con HtmlClose {: root = Node.createHtmlNode((Node)con); :}
 ;
 
 IMG_ATTR ::=
@@ -650,9 +659,9 @@ BASEFONT_ATTR ::=
 
 //merge
 BASEFONT_TAG ::=
-    BasefontOpen EndTag BasefontClose |
-    BasefontOpen Content BasefontClose | 
-    BasefontOpen BASEFONT_ATTR Content BasefontClose
+    BasefontOpen EndTag: con BasefontClose {: RESULT = Node.createBasefontNode(""); :} |
+    BasefontOpen Content: con BasefontClose {: RESULT = Node.createBasefontNode((String)con); :} | 
+    BasefontOpen BASEFONT_ATTR Content: con BasefontClose {: RESULT = Node.createBasefontNode((String)con); :}
 ;
 
 ERROR_S ::=

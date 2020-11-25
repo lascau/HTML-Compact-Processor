@@ -850,6 +850,10 @@ public class GUI extends javax.swing.JFrame {
 
         try {
             s.parse();
+            // print abstract syntax tree
+            if (s.root != null) {
+                s.root.printAst(0);
+            }
             outputTextBox.setText("Successfully checked! ✔");
             outputTextBox.setForeground(new Color (25,111,61));
         } catch (Exception ex) {

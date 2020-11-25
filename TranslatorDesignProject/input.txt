@@ -2,6 +2,6 @@
 	<head>
 		fdffd
 	</head>
-	<body>
-		sds
-	</body></html>
+	<body link="232"><b>dfdfd</b>
+<basefont>sdsds</basefont></body>
+</html>
