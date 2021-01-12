@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -45,21 +48,15 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonAnalyser = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputTextBox = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         inputTextBoxe = new javax.swing.JTextArea();
+        buttonAnalyser1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        buttonAnalyser.setText("Lexical analysis");
-        buttonAnalyser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAnalyserActionPerformed(evt);
-            }
-        });
 
         outputTextBox.setEditable(false);
         outputTextBox.setColumns(20);
@@ -79,6 +76,20 @@ public class GUI extends javax.swing.JFrame {
         inputTextBoxe.setRows(5);
         jScrollPane3.setViewportView(inputTextBoxe);
 
+        buttonAnalyser1.setText("Lexical analysis");
+        buttonAnalyser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAnalyser1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("DOM Parser");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,9 +97,11 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(buttonAnalyser, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
+                        .addGap(152, 152, 152)
+                        .addComponent(buttonAnalyser1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
@@ -106,16 +119,40 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAnalyser, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAnalyser1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAnalyserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAnalyserActionPerformed
-        File file = new File("input.txt");
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String st = inputTextBoxe.getText();
+        Sintax s = new Sintax(new work.LexerCup(new StringReader(st)));
+
+        try {
+            s.parse();
+            // print abstract syntax tree
+            //if (s.root != null) {
+                //s.root.printAst(0);
+            //}
+            s.root.printAst(1);
+            s.table.printSymbolsTable();
+            outputTextBox.setText("Successfully checked! ✔");
+            outputTextBox.setForeground(new Color (25,111,61));
+        } catch (Exception ex) {
+            Symbol sym = s.getS();
+
+            outputTextBox.setText("Syntax error! \n"+ "Line: " + (sym.right + 1) + ", Column: " + (sym.left + 1) + "\nSymbol starting at: " + sym.value + "\n");
+            outputTextBox.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonAnalyser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAnalyser1ActionPerformed
+         File file = new File("input.txt");
         PrintWriter out;
         try {
             out = new PrintWriter(file);
@@ -841,28 +878,40 @@ public class GUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_buttonAnalyserActionPerformed
+    }//GEN-LAST:event_buttonAnalyser1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String st = inputTextBoxe.getText();
-        Sintax s = new Sintax(new work.LexerCup(new StringReader(st)));
-
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //System.out.println("test dom parser!");
+        DomParser dom = new DomParser();
         try {
-            s.parse();
-            // print abstract syntax tree
-            if (s.root != null) {
-                s.root.printAst(0);
-            }
-            outputTextBox.setText("Successfully checked! ✔");
-            outputTextBox.setForeground(new Color (25,111,61));
-        } catch (Exception ex) {
-            Symbol sym = s.getS();
 
-            outputTextBox.setText("Syntax error! \n"+ "Line: " + (sym.right + 1) + ", Column: " + (sym.left + 1) + "\nSymbol starting at: " + sym.value + "\n");
-            outputTextBox.setForeground(Color.red);
+            File file = new File("C:\\Users\\Lascau\\Desktop\\HTML-Compact-Processor\\TranslatorDesignProject\\input.txt");
+           
+            // write in our input file what is in the text box
+            try (PrintWriter out = new PrintWriter(file)) {
+                out.println(inputTextBoxe.getText());
+            }
+            
+            // instantiate a document builder object used for parsing
+            DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance()
+                                     .newDocumentBuilder();
+            
+            // parse the tags from the input
+            Document doc = docBuilder.parse(file);
+            
+            // print the root tag name
+            System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+            
+            // print the dom
+            if (doc.hasChildNodes()) {
+                dom.print(doc.getChildNodes(), 0);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -901,9 +950,10 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAnalyser;
+    private javax.swing.JButton buttonAnalyser1;
     private javax.swing.JTextArea inputTextBoxe;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea outputTextBox;

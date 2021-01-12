@@ -9,6 +9,10 @@ import java_cup.runtime.Symbol;
 %full
 %line
 %char
+%eofval{ 
+    return symbol(sym.EOF); 
+%eofval}
+
 %{ /*section1 */
     private Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
@@ -17,6 +21,7 @@ import java_cup.runtime.Symbol;
         return new Symbol(type, yyline, yycolumn);
     }
 %}
+
 
 /*section 2 */
 L = [a-zA-Z_]+
@@ -513,6 +518,7 @@ while {lexeme=yytext(); return Attributes;}
 {DOCTYPE_TAG}  {return symbol(sym.DOCTYPE);}
 
 {End} {return symbol(sym.EndTag);}
+">" {return symbol(sym.EndTag); }
 {LineTerminator} {return symbol(sym.LineTerminator);}
 //Content
 {CONTENT} {return symbol(sym.Content);}

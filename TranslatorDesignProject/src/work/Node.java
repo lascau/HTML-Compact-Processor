@@ -6,6 +6,8 @@
 package work;
 
 import java.util.ArrayList;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -14,11 +16,14 @@ import java.util.ArrayList;
 
 
 public class Node {
+
+    static boolean ELEMENT_NODE;
     public String type; // the type of the node
     public String content; // actual content if it can not contains nodes
     private ArrayList<Node> children; // links with other nodes
     
     public Node(String type) {
+        this.children = new ArrayList<Node>();
         this.type = type; 
     }
     
@@ -28,7 +33,9 @@ public class Node {
     } 
     
     public void addLink(Node child) {
-        children.add(child);
+        if (child != null) {
+            children.add(child);
+        }
     }
     
     public void printAst(int level) {       
@@ -36,11 +43,11 @@ public class Node {
             System.out.print(" ");           
             
             if (type != null) {
-                System.out.print(" - " + type);
+                System.out.print("  " + type);
             }
             
             if (children.size() > 0) {
-                System.out.print(" - " + children.size() + "\n");
+                System.out.print(" - " + children.size() + "\n    ");
             }
             for (Node node : children) {
                 node.printAst(level + 1);
@@ -56,11 +63,11 @@ public class Node {
         return htmlNode;
     }
     
-    public static Node createHeadNode(String content){
+    public static Node createHeadNode(Node headContent){
         Node headNode = createNode("Head node");
         
-        if (headNode != null && content != null){
-            headNode.content = content;            
+        if (headContent != null){
+            headNode.children.add(headContent);            
         }      
         return headNode;
     }

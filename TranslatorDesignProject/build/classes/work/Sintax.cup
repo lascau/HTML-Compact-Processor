@@ -5,6 +5,7 @@ parser code
 {:
     
     public Node root = null;
+    public SymbolsTable table = new SymbolsTable();
     private Symbol s;
     
     public void syntax_error(Symbol s){
@@ -21,7 +22,7 @@ terminal ERROR, Content,
         HrOpen, HrClose, BrOpen, BrClose, AbbrOpen, AbbrClose, AcronymOpen, AcronymClose, AddressOpen, AddressClose, AppletOpen, AppletClose, BOpen, BClose, ButtonOpen, ButtonClose, CodeOpen, CodeClose, HeadOpen, HeadClose, SampOpen, SampClose, DelOpen, DelClose, XmpOpen, XmpClose, StrongOpen, StrongClose, VarOpen, VarClose, UOpen, UClose, SOpen, SClose, QOpen, QClose, IOpen, IClose, LabelOpen, LabelClose, LegendOpen, LegendClose, ListingOpen, ListingClose, NoframesOpen, NoframesClose, DdOpen, DdClose, DfnOpen, DfnClose, DtOpen, DtClose, EmOpen, EmClose, ScriptOpen, ScriptClose, SmallOpen, SmallClose,  SpanOpen, SpanClose, StrikeOpen, StrikeClose, StyleOpen, StyleClose, SubOpen, SubClose, SupOpen, SupClose, FrameOpen, FrameClose, FramesetOpen, FramesetClose, IframeOpen, IframeClose, InsOpen, InsClose, KbdOpen, KbdClose, ColgroupOpen, ColgroupClose, FieldsetOpen, FieldsetClose, NoscriptOpen, NoscriptClose, ObjectOpen, ObjectClose, OptgroupOpen,  OptgroupClose, ParamOpen, ParamClose, PlaintextOpen, PlaintextClose,  TheadOpen, TheadClose, TitleOpen, TitleClose, BlockquoteOpen, BlockquoteClose,  CaptionOpen, CaptionClose, CenterOpen, CenterClose, CiteOpen, CiteClose, ColOpen, ColClose, TtOpen, TtClose, LiOpen, LiClose, LinkOpen, LinkClose, MapOpen, MapClose, MenuOpen, MenuClose, MetaOpen, MetaClose, NextidOpen, NextidClose, OlOpen, OlClose, OptionOpen, OptionClose, POpen, PClose, PreOpen, PreClose, SelectOpen, SelectClose, TableOpen,  TableClose,  TdOpen, TdClose, TextareaOpen, TextareaClose, ThOpen, ThClose, TrOpen, TrClose, UlOpen, UlClose, TbodyOpen, TbodyClose,  DlOpen, DlClose, FontOpen, FontClose, FormOpen, FormClose, HnOpen, HnClose, HtmlOpen, HtmlClose, ImgOpen, ImgClose, InputOpen, InputClose, IsindexOpen, IsindexClose, BigOpen, BigClose,  BdoOpen, BdoClose, BasefontOpen, BasefontClose, BodyOpen, BodyClose, DivOpen, DivClose, AOpen, AClose, AreaOpen, AreaClose, BaseOpen, BaseClose, DirOpen, DirClose,     
         SizeAttr, WidthAttr, AlignAttr, NoshadeAttr, NameAttr, HrefAttr, RelAttr, RevAttr, TitleAttr, UrnAttr, MethodsAttr, ShapeAttr, CoordsAttr, AltAttr,  NohrefAttr, BgcolorAttr, BackgroundAttr, TextAttr, LinkAttr, VlinkAttr, AlinkAttr, VersionAttr,  ColorAttr, CompactAttr, ClearAttr, ActionAttr, EnctypeAttr, MethodAttr, SrcAttr, HeightAttr, HspaceAttr, VspaceAttr, BorderAttr,  UsemapAttr, IsmapAttr, TypeAttr, ValueAttr, MaxlengthAttr,  CheckedAttr, PromptAttr, IdAttr, HttpEquivAttr, ContentAttr, StartAttr,  SelectedAttr, MultipleAttr,  CellspacingAttr, CellpaddingAttr, ValignAttr, RowspanAttr, ColspanAttr, NowrapAttr, RowsAttr, ColsAttr, LineTerminator, EndTag, DOCTYPE;                   
 
-non terminal ABBR_TAG, ACRONYM_TAG, ADDRESS_TAG, APPLET_TAG, B_TAG, BDO_TAG, BIG_TAG, BLOCKQUOTE_TAG, BUTTON_TAG, CAPTION_TAG, CENTER_TAG, CITE_TAG, CODE_TAG, COL_TAG, COLGROUP_TAG, DD_TAG, DEL_TAG, DFN_TAG,
+non terminal Node ABBR_TAG, ACRONYM_TAG, ADDRESS_TAG, APPLET_TAG, B_TAG, BDO_TAG, BIG_TAG, BLOCKQUOTE_TAG, BUTTON_TAG, CAPTION_TAG, CENTER_TAG, CITE_TAG, CODE_TAG, COL_TAG, COLGROUP_TAG, DD_TAG, DEL_TAG, DFN_TAG,
 DT_TAG, EM_TAG, FIELDSET_TAG, FRAME_TAG, FRAMESET_TAG, HEAD_TAG, I_TAG, IFRAME_TAG, INS_TAG, KBD_TAG, LABEL_TAG, LEGEND_TAG, LISTING_TAG, NOFRAMES_TAG, NOSCRIPT_TAG, OBJECT_TAG, OPTGROUP_TAG,
 PARAM_TAG, PLAINTEXT_TAG, Q_TAG, S_TAG, SAMP_TAG, SCRIPT_TAG, SMALL_TAG, SPAN_TAG, STRIKE_TAG, STRONG_TAG, STYLE_TAG, SUB_TAG, SUP_TAG, TBODY_TAG, THEAD_TAG, TITLE_TAG, TT_TAG, U_TAG, VAR_TAG,
 XMP_TAG, MENU_TAG, A_TAG, AREA_TAG, BASE_TAG, BODY_TAG, BR_TAG, DIV_TAG, DIR_TAG, DL_TAG, FONT_TAG, FORM_TAG, HR_TAG, HN_TAG, HTML_TAG, IMG_TAG, INPUT_TAG, ISINDEX_TAG, LI_TAG, LINK_TAG, MAP_TAG, META_TAG, NEXTID_TAG, OL_TAG, OPTION_TAG, P_TAG, PRE_TAG, SELECT_TAG, 
@@ -66,7 +67,7 @@ APPLET_TAG ::=
 
 B_TAG ::= 
     BOpen EndTag BClose |
-    BOpen Content: con BClose {: RESULT = Node.createBNode((String)con); :}
+    BOpen Content: con BClose {: /*RESULT = Node.createBNode((String)con);*/ :}
 ;
 
 BLOCKQUOTE_TAG ::= 
@@ -159,7 +160,7 @@ FRAMESET_TAG ::=
 ;
 
 HEAD_TAG ::=    
-    HeadOpen EndTag HeadClose |
+    HeadOpen EndTag HeadClose {: parser.root.addLink((Node)RESULT); :}|
     HeadOpen Content HeadClose
 ;
 
@@ -454,26 +455,35 @@ HTML_ATTR ::=
 ;
 
 HTML_CONTENT ::=
-    HEAD_TAG {: RESULT = Node.createHeadNode("Head node"); 
-                root.addLink(RESULT);:} |
-    HEAD_TAG LineTerminator {: RESULT = Node.createHeadNode("Head node"); 
-                            root.addLink(RESULT);:}  |
+    HEAD_TAG {: /*Node newNode = Node.createHeadNode("Head node"); 
+                parser.root.addLink((Node)newNode);
+                RESULT = newNode;*/
+:} |
+    HEAD_TAG LineTerminator {: /*RESULT = Node.createHeadNode("Head node"); 
+                            parser.root.addLink(RESULT);*/:}  |
     BODY_TAG |
     BODY_TAG LineTerminator |
-    HEAD_TAG BODY_TAG {: RESULT = Node.createHeadNode("Head node"); 
-                        root.addLink(RESULT);:} |
+    HEAD_TAG BODY_TAG {: /*RESULT = Node.createHeadNode("Head node"); 
+                        parser.root.addLink(RESULT);*/:} |
     HEAD_TAG BODY_TAG LineTerminator |
-    HEAD_TAG LineTerminator BODY_TAG {: RESULT = Node.createHeadNode("Head node"); 
-                                        root.addLink(RESULT);:}  |
-    HEAD_TAG LineTerminator BODY_TAG LineTerminator {: RESULT = Node.createHeadNode("Head node"); 
-                                                        root.addLink(RESULT);:} 
+    HEAD_TAG LineTerminator BODY_TAG {: /*RESULT = Node.createHeadNode("Head node"); 
+                                        parser.root.addLink(RESULT);*/:}  |
+    HEAD_TAG:con LineTerminator BODY_TAG:conn LineTerminator {: RESULT = Node.createHeadNode((Node)con);
+                                                        parser.table.addTagByName("HEAD");
+                                                        parser.table.addTagByName("BODY");
+                                                        //parser.root.addLink((Node)RESULT);
+                                                         //System.out.println(parser.root);
+                                                        //RESULT = Node.createBodyNode((Node)conn);
+                                                        //parser.root.addLink((Node)RESULT);
+                                                        //System.out.print(RESULT.type);
+:} 
 ;
 
 
 HTML_TAG ::=
-    HtmlOpen EndTag HtmlClose: con HtmlClose {: root = Node.createHtmlNode(new Node("")); :} |
-    HtmlOpen EndTag HTML_CONTENT : con HtmlClose {: root = Node.createHtmlNode((Node)con); :} |
-    HtmlOpen HTML_ATTR EndTag HTML_CONTENT: con HtmlClose {: root = Node.createHtmlNode((Node)con); :}
+    HtmlOpen EndTag HtmlClose: con HtmlClose {: parser.root = Node.createHtmlNode(new Node("")); :} |
+    HtmlOpen EndTag HTML_CONTENT : con HtmlClose {: parser.root = Node.createHtmlNode((Node)con);  :} |
+    HtmlOpen HTML_ATTR EndTag HTML_CONTENT: con HtmlClose {:  parser.root = Node.createHtmlNode((Node)con);  parser.table.addTagByName("HTML");:}
 ;
 
 IMG_ATTR ::=
@@ -659,9 +669,9 @@ BASEFONT_ATTR ::=
 
 //merge
 BASEFONT_TAG ::=
-    BasefontOpen EndTag: con BasefontClose {: RESULT = Node.createBasefontNode(""); :} |
-    BasefontOpen Content: con BasefontClose {: RESULT = Node.createBasefontNode((String)con); :} | 
-    BasefontOpen BASEFONT_ATTR Content: con BasefontClose {: RESULT = Node.createBasefontNode((String)con); :}
+    BasefontOpen EndTag: con BasefontClose {: /*RESULT = Node.createBasefontNode("");*/ :} |
+    BasefontOpen Content: con BasefontClose {: /*RESULT = Node.createBasefontNode((String)con); */:} | 
+    BasefontOpen BASEFONT_ATTR Content: con BasefontClose {: /*RESULT = Node.createBasefontNode((String)con); */:}
 ;
 
 ERROR_S ::=
