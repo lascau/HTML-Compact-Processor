@@ -39,10 +39,6 @@ public class DomParser {
                      NamedNodeMap nodeMap = copyNode.getAttributes();
                     for (int i = 0; i < nodeMap.getLength(); i++) {
                         
-                        for (int ident = 0; ident < nestingLevel; ++ident) {
-                            System.out.print("    ");
-                        }
-                        
                         Node node = (Node) nodeMap.item(i);
                         ident(nestingLevel);
                         System.out.println("    Attribute name : " + node.getNodeName());
