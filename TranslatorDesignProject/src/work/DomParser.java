@@ -5,7 +5,6 @@
  */
 package work;
 
-import javax.swing.JTextArea;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -28,11 +27,10 @@ public class DomParser {
             Node copyNode = (Node) currentNode.item(index);
             if (copyNode.getNodeType() == Node.ELEMENT_NODE) {
                
-                // get node name and value
+                // get node name
                 ident(nestingLevel);
                 System.out.println("Node " + copyNode.getNodeName() + "-> OPEN");
-                ident(nestingLevel);
-                System.out.println("    Node value = " + copyNode.getTextContent());
+               
                 
                 // handling attributes
                 if (copyNode.hasAttributes()) {
@@ -47,6 +45,10 @@ public class DomParser {
 
                     }
                 }
+                
+                // get node content
+                ident(nestingLevel);
+                System.out.println("    Node value = " + copyNode.getTextContent());
                 
                 if (copyNode.hasChildNodes()) {
                     // traverse his childs recursively
